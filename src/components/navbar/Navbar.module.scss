@@ -1,0 +1,12 @@
+.navigationbar{
+    height: 40px;
+    position: sticky;
+    top: 0;
+    background-color: #e57373;
+    z-index: 999;
+}
+.navlist{
+    display: flex;
+    column-gap: 10px;
+    padding: 10px;
+}

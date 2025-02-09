@@ -1,0 +1,9 @@
+.relative{
+    position: relative;
+}
+.cpyBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}

@@ -1,0 +1,35 @@
+.p-10{
+    padding: 10px;
+}
+
+.inputgroup {
+    position: relative;
+
+    .labelEl {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #fff;
+        transition: all 0.3s ease;
+    }
+
+    .inputEl {
+        outline: none;
+        padding: 10px;
+        border-radius: 2px;
+        border-color: red;
+    }
+
+    .inputEl:focus+label {
+        // transform: translateY(-100%);
+        top: 0%;
+        color: #0016ff;
+    }
+
+    .inputEl:focus {
+        // border-color: #0016ff;
+        border-radius: 2px;
+    }
+
+}
