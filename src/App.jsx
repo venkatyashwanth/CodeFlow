@@ -10,7 +10,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/home" element={<Homepage />} />
+          <Route path="/" element={<Homepage />} />
           <Route path="/*" element={<Nopage />} />
           <Route path="/react" element={<ReactSnips />} />
           <Route path="forms" element={<Input />} />
