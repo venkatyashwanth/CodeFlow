@@ -26,6 +26,21 @@ const Navigation = ({ scrollToSection }) => {
                             Use Effect
                         </a>
                     </li>
+                    <li>
+                        <a onClick={() => scrollToSection("userefhook")} style={{ cursor: "pointer" }}>
+                            Use Ref
+                        </a>
+                    </li>
+                    <li>
+                        <a onClick={() => scrollToSection("usememohook")} style={{ cursor: "pointer" }}>
+                            Use Memo
+                        </a>
+                    </li>
+                    <li>
+                        <a onClick={() => scrollToSection("usecallbackhook")} style={{ cursor: "pointer" }}>
+                            Use CallBack
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -38,13 +53,19 @@ const ReactSnips = () => {
     const cnt2Ref = useRef(null);
     const useStateHookRef = useRef(null);
     const useEffectHookRef = useRef(null);
+    const useRefRef = useRef(null);
+    const useMemoRef = useRef(null);
+    const useCallbackRef = useRef(null);
 
     const scrollToSection = (id) => {
         const refs = {
             cnt1: cnt1Ref,
             cnt2: cnt2Ref,
             usestatehook: useStateHookRef,
-            useeffecthook: useEffectHookRef
+            useeffecthook: useEffectHookRef, 
+            userefhook: useRefRef,
+            usememohook: useMemoRef,
+            usecallbackhook: useCallbackRef
         };
         refs[id]?.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -71,7 +92,7 @@ const ReactSnips = () => {
                     </div>
                     <div ref={cnt2Ref} id="cnt2" className={`${styles.fixScroll} ${styles.container}`}>
                         <h4 className={`${styles.Titleheading}`}>React Hooks:</h4>
-                        <HookElements useStateHookRef={useStateHookRef} useEffectHookRef={useEffectHookRef}/>
+                        <HookElements refs={{ useStateHookRef, useEffectHookRef,useRefRef,useMemoRef,useCallbackRef }}/>
                     </div>
                     <div id="cont3" className={`${styles.fixScroll}`}>
                         <div className={`${styles.emptyPage}`}>

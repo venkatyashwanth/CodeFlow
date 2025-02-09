@@ -3,15 +3,9 @@ import styles from "./HookElements.styles.module.scss"
 import CodeBlock from '../../../components/codeblock/CodeBlock';
 import data from '../CodeSnipets';
 
-
-const textData1 = data?.[0]?.code?.toString() || "";
-const textData2 = data?.[1]?.code?.toString() || "";
-const textData3 = data?.[2]?.code?.toString() || "";
-const textData4 = data?.[3]?.code?.toString() || "";
-const textData5 = data?.[4]?.code?.toString() || "";
-const textData6 = data?.[5]?.code?.toString() || "";
-
-const HookElements = ({ useStateHookRef, useEffectHookRef }) => {
+const HookElements = ({ refs }) => {
+    const { useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef } = refs;
+    const textData = Array.from({ length: data.length }, (_, i) => data?.[i]?.code?.toString() || "");
     return (
         <>
             {/* Use State */}
@@ -19,15 +13,15 @@ const HookElements = ({ useStateHookRef, useEffectHookRef }) => {
                 <h4 className={`${styles.subheading}`}>UseState:-</h4>
                 <p>Use State (Type-1): </p>
                 <div className={`${styles.my10}`}>
-                    <CodeBlock code={textData1} mode={"javascript"} />
+                    <CodeBlock code={textData[0]} mode={"javascript"} />
                 </div>
                 <p>Use State (Type-2): Multiple State Variable</p>
                 <div className={`${styles.my10}`}>
-                    <CodeBlock code={textData2} mode={"javascript"} />
+                    <CodeBlock code={textData[1]} mode={"javascript"} />
                 </div>
                 <p>Use State (Type-3): Counter</p>
                 <div className={`${styles.my10}`}>
-                    <CodeBlock code={textData3} mode={"javascript"} />
+                    <CodeBlock code={textData[2]} mode={"javascript"} />
                 </div>
             </div>
 
@@ -36,20 +30,42 @@ const HookElements = ({ useStateHookRef, useEffectHookRef }) => {
                 <h4 className={`${styles.subheading}`}>UseEffect:-</h4>
                 <p>Use Effect:</p>
                 <div className={`${styles.my10}`}>
-                    <CodeBlock code={textData4} mode={"javascript"} />
+                    <CodeBlock code={textData[3]} mode={"javascript"} />
                 </div>
                 <p>Use Effect (Dependency Array): </p>
                 <div className={`${styles.my10}`}>
-                    <CodeBlock code={textData5} mode={"javascript"} />
+                    <CodeBlock code={textData[4]} mode={"javascript"} />
                 </div>
             </div>
 
             {/* Use Ref */}
-            <div id="useRefHook">
+            <div ref={useRefRef} id="userefhook" style={{ scrollMarginTop: "50px" }}>
                 <h4 className={`${styles.subheading}`}>UseRef:-</h4>
                 <p>Use Ref:</p>
                 <div className={`${styles.my10}`}>
-                    <CodeBlock code={textData6} mode={"javascript"} />
+                    <CodeBlock code={textData[5]} mode={"javascript"} />
+                </div>
+                <p>Use Ref: Accessing Dom Elements</p>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[6]} mode={"javascript"} />
+                </div>
+            </div>
+
+            {/* Use Memo */}
+            <div ref={useMemoRef} id="usememohook" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>UseMemo:-</h4>
+                <p>Use Memo: When button is clicked, it will not effect other function.</p>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[7]} mode={"javascript"} />
+                </div>
+            </div>
+
+            {/* Use Callback */}
+            <div ref={useCallbackRef} id="usecallbackhook" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>UseCallback:-</h4>
+                <p>Use Callback: </p>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[8]} mode={"javascript"} />
                 </div>
             </div>
         </>
