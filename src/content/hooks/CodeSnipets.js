@@ -191,7 +191,113 @@ const IuseCallback = () => {
 
 export default IuseCallback
 `
+    },
+    {
+        id: 10,
+        "code": `
+import { createContext } from "react";
+
+export const AppContext = createContext();
+
+const ContextProvider = (props) => {
+    const appState = {
+        phone: "+1 1234567890", 
+        name: "John"
+    };
+    return (
+        <AppContext.Provider value={appState}>
+            {props.children}
+        </AppContext.Provider>
+    )
+}
+
+export default ContextProvider
+
+// --------------------------------------------------
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import ContextProvider from './components/Hooks/IuseContext/context/AppContext.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <ContextProvider>
+    <App />
+  </ContextProvider>
+)
+
+// --------------------------------------------------
+
+import React from 'react'
+import Profile from './components/Profile'
+import Footer from './components/Footer'
+
+const IuseContext = () => {
+    return (
+        <>
+            <Profile />
+            <Footer/>
+        </>
+    )
+}
+
+export default IuseContext
+
+// --------------------------------------------------
+
+import React from 'react'
+import Contact from './Contact'
+
+const Profile = () => {
+    return (
+        <div>
+            <h2>Profile</h2>
+            <Contact />
+        </div>
+    )
+}
+
+export default Profile
+
+// --------------------------------------------------
+
+import React, { useContext } from 'react'
+import { AppContext } from '../context/AppContext'
+
+const Contact = () => {
+    const appState = useContext(AppContext);
+    return (
+        <div>
+            <h2>Contact</h2>
+            <span>Phone: {appState.phone}</span>
+        </div>
+    )
+}
+
+export default Contact
+
+// --------------------------------------------------
+
+import React, { useContext } from 'react'
+import { AppContext } from '../context/AppContext'
+
+const Footer = () => {
+    const  appState  = useContext(AppContext)
+    return (
+        <div>
+            <h2>Footer</h2>
+            <span>Phone: {appState.phone}</span><br />
+            <span>Name: {appState.name}</span>
+        </div>
+    )
+}
+
+export default Footer
+
+        `
     }
+
 ]
 
 

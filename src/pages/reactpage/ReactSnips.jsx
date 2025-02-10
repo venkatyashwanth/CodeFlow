@@ -41,6 +41,11 @@ const Navigation = ({ scrollToSection }) => {
                             Use CallBack
                         </a>
                     </li>
+                    <li>
+                        <a onClick={() => scrollToSection("usecontexthook")} style={{ cursor: "pointer" }}>
+                            Use Context
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -56,6 +61,7 @@ const ReactSnips = () => {
     const useRefRef = useRef(null);
     const useMemoRef = useRef(null);
     const useCallbackRef = useRef(null);
+    const useContextRef = useRef(null);
 
     const scrollToSection = (id) => {
         const refs = {
@@ -65,7 +71,8 @@ const ReactSnips = () => {
             useeffecthook: useEffectHookRef, 
             userefhook: useRefRef,
             usememohook: useMemoRef,
-            usecallbackhook: useCallbackRef
+            usecallbackhook: useCallbackRef,
+            usecontexthook: useContextRef
         };
         refs[id]?.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -92,7 +99,7 @@ const ReactSnips = () => {
                     </div>
                     <div ref={cnt2Ref} id="cnt2" className={`${styles.fixScroll} ${styles.container}`}>
                         <h4 className={`${styles.Titleheading}`}>React Hooks:</h4>
-                        <HookElements refs={{ useStateHookRef, useEffectHookRef,useRefRef,useMemoRef,useCallbackRef }}/>
+                        <HookElements refs={{ useStateHookRef, useEffectHookRef,useRefRef,useMemoRef,useCallbackRef,useContextRef }}/>
                     </div>
                     <div id="cont3" className={`${styles.fixScroll}`}>
                         <div className={`${styles.emptyPage}`}>

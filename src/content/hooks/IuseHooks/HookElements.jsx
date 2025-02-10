@@ -4,7 +4,7 @@ import CodeBlock from '../../../components/codeblock/CodeBlock';
 import data from '../CodeSnipets';
 
 const HookElements = ({ refs }) => {
-    const { useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef } = refs;
+    const { useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef, useContextRef } = refs;
     const textData = Array.from({ length: data.length }, (_, i) => data?.[i]?.code?.toString() || "");
     return (
         <>
@@ -66,6 +66,15 @@ const HookElements = ({ refs }) => {
                 <p>Use Callback: </p>
                 <div className={`${styles.my10}`}>
                     <CodeBlock code={textData[8]} mode={"javascript"} />
+                </div>
+            </div>
+
+            {/* Use Context */}
+            <div ref={useContextRef} id="usecontexthook" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>UseContext:-</h4>
+                <p>UseContext: </p>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[9]} mode={"javascript"} />
                 </div>
             </div>
         </>

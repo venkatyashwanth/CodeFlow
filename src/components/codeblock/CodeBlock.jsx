@@ -26,7 +26,7 @@ const CodeBlock = ({ code, mode }) => {
                     width="100%"
                     fontSize={"20px"}
                     setOptions={{
-                        maxLines: 40
+                        maxLines: 400
                     }}
                 />
                 <button className='cpyBtn' onClick={handleCopy}>
