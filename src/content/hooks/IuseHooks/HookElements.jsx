@@ -77,6 +77,15 @@ const HookElements = ({ refs }) => {
                     <CodeBlock code={textData[9]} mode={"javascript"} />
                 </div>
             </div>
+
+            {/* Use reducer */}
+            <div id="usereducerhook" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>UseContext:-</h4>
+                <p>UseContext: </p>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[10]} mode={"javascript"} />
+                </div>
+            </div>
         </>
     )
 }
