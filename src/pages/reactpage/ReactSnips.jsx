@@ -46,6 +46,16 @@ const Navigation = ({ scrollToSection }) => {
                             Use Context
                         </a>
                     </li>
+                    <li>
+                        <a onClick={() => scrollToSection("usereducerhook")} style={{ cursor: "pointer" }}>
+                            Use Reducer
+                        </a>
+                    </li>
+                    <li>
+                        <a onClick={() => scrollToSection("uselayouteffect")} style={{ cursor: "pointer" }}>
+                            Use LayoutEffect
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -62,6 +72,8 @@ const ReactSnips = () => {
     const useMemoRef = useRef(null);
     const useCallbackRef = useRef(null);
     const useContextRef = useRef(null);
+    const useReducerRef = useRef(null);
+    const useLayoutEffectRef = useRef(null);
 
     const scrollToSection = (id) => {
         const refs = {
@@ -72,7 +84,9 @@ const ReactSnips = () => {
             userefhook: useRefRef,
             usememohook: useMemoRef,
             usecallbackhook: useCallbackRef,
-            usecontexthook: useContextRef
+            usecontexthook: useContextRef,
+            usereducerhook: useReducerRef,
+            uselayouteffect: useLayoutEffectRef
         };
         refs[id]?.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -99,7 +113,7 @@ const ReactSnips = () => {
                     </div>
                     <div ref={cnt2Ref} id="cnt2" className={`${styles.fixScroll} ${styles.container}`}>
                         <h4 className={`${styles.Titleheading}`}>React Hooks:</h4>
-                        <HookElements refs={{ useStateHookRef, useEffectHookRef,useRefRef,useMemoRef,useCallbackRef,useContextRef }}/>
+                        <HookElements refs={{ useStateHookRef, useEffectHookRef,useRefRef,useMemoRef,useCallbackRef,useContextRef,useReducerRef,useLayoutEffectRef }}/>
                     </div>
                     <div id="cont3" className={`${styles.fixScroll}`}>
                         <div className={`${styles.emptyPage}`}>

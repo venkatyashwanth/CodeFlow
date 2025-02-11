@@ -307,11 +307,14 @@ const IuseReducer = () => {
 
     const reducer = (state, action) => {
         switch (action.type) {
-            case 'increase' : {
+            case 'increase': {
                 return { count: state.count + 1 }
             }
-            case 'decrease' : {
+            case 'decrease': {
                 return { count: state.count - 1 }
+            }
+            case 'input': {
+                return { count: action.payload }
             }
             default: {
                 return state
@@ -326,11 +329,50 @@ const IuseReducer = () => {
             <h1>{state.count}</h1>
             <button onClick={() => dispatch({ type: 'increase' })}>Increase</button >
             <button onClick={() => dispatch({ type: 'decrease' })}>Deccrease</button>
+            <br />
+            <input
+                value={state.count}
+                onChange={(e) => { dispatch({ type: 'input', payload: Number(e.target.value) }) }}
+                type="number"
+            />
         </>
     )
 }
 
 export default IuseReducer
+        `
+    },
+    {
+        id: 12,
+        "code": `
+        const containerRef = useRef(null);
+
+    useLayoutEffect(() => {
+        if (containerRef.current) {
+            // Scroll to the bottom BEFORE the next paint
+            containerRef.current.scrollTop = containerRef.current.scrollHeight;
+        }
+    }, []);
+    
+    return (
+        <div>
+            <h2>useLayoutEffect Scroll Example</h2>
+            <div
+                ref={containerRef}
+                style={{
+                    height: "200px",
+                    width: "300px",
+                    overflow: "auto",
+                    border: "1px solid black",
+                    padding: "10px",
+                }}
+            >
+                {Array.from({ length: 50 }, (_, i) => (
+                    <p key={i}>Item {i + 1}</p>
+                ))}
+            </div>
+        </div>
+    );
         `
     }
 

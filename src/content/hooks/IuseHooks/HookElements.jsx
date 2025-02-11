@@ -4,7 +4,7 @@ import CodeBlock from '../../../components/codeblock/CodeBlock';
 import data from '../CodeSnipets';
 
 const HookElements = ({ refs }) => {
-    const { useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef, useContextRef } = refs;
+    const { useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef, useContextRef,useReducerRef,useLayoutEffectRef } = refs;
     const textData = Array.from({ length: data.length }, (_, i) => data?.[i]?.code?.toString() || "");
     return (
         <>
@@ -79,11 +79,20 @@ const HookElements = ({ refs }) => {
             </div>
 
             {/* Use reducer */}
-            <div id="usereducerhook" style={{ scrollMarginTop: "50px" }}>
-                <h4 className={`${styles.subheading}`}>UseContext:-</h4>
-                <p>UseContext: </p>
+            <div ref={useReducerRef} id="usereducerhook" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>UseReducer:-</h4>
+                <p>UseReducer: Increment and Decrement Counter</p>
                 <div className={`${styles.my10}`}>
                     <CodeBlock code={textData[10]} mode={"javascript"} />
+                </div>
+            </div>
+
+            {/* UseLayoutEffect */}
+            <div ref={useLayoutEffectRef} id="uselayouteffect" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>UseLayoutEffect:-</h4>
+                <p>UseLayoutEffect: </p>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[11]} mode={"javascript"} />
                 </div>
             </div>
         </>
