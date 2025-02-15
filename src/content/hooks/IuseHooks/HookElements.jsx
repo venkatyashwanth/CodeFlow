@@ -4,7 +4,7 @@ import CodeBlock from '../../../components/codeblock/CodeBlock';
 import data from '../CodeSnipets';
 
 const HookElements = ({ refs }) => {
-    const { useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef, useContextRef,useReducerRef,useLayoutEffectRef } = refs;
+    const { useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef, useContextRef,useReducerRef,useLayoutEffectRef,customHookRef } = refs;
     const textData = Array.from({ length: data.length }, (_, i) => data?.[i]?.code?.toString() || "");
     return (
         <>
@@ -93,6 +93,15 @@ const HookElements = ({ refs }) => {
                 <p>UseLayoutEffect: </p>
                 <div className={`${styles.my10}`}>
                     <CodeBlock code={textData[11]} mode={"javascript"} />
+                </div>
+            </div>
+
+            {/* CustomHook */}
+            <div ref={customHookRef}  id="customhook" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>CustomHook:-</h4>
+                <p>CustomHook: </p>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[12]} mode={"javascript"} />
                 </div>
             </div>
         </>

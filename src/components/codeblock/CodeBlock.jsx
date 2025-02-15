@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
-import './codeBlockStyles.css';
+import React from 'react';
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-sql";
 import "ace-builds/src-noconflict/mode-html"
 import "ace-builds/src-noconflict/theme-monokai";
+import './codeBlockStyles.css';
+import ace from "ace-builds";
+
+ace.config.set("workerPath", "https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/");
+
+
 
 const CodeBlock = ({ code, mode }) => {
     const cleanCode = code.trim();
@@ -17,7 +22,7 @@ const CodeBlock = ({ code, mode }) => {
     }
     return (
         <>
-            <div className='relative'>
+            <div className='relative' >
                 <AceEditor
                     mode={mode}
                     theme="monokai"
@@ -26,7 +31,8 @@ const CodeBlock = ({ code, mode }) => {
                     width="100%"
                     fontSize={"20px"}
                     setOptions={{
-                        maxLines: 400
+                        maxLines: 400,
+                        useWorker: false
                     }}
                 />
                 <button className='cpyBtn' onClick={handleCopy}>

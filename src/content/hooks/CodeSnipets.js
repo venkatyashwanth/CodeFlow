@@ -374,6 +374,51 @@ export default IuseReducer
         </div>
     );
         `
+    },
+    {
+        id: 13,
+        'code':`
+import React from 'react'
+import UseLocalStorage from './UseLocalStorage'
+
+const Icustomhook = () => {
+    const [name, setName] = UseLocalStorage('username', '');
+    const [id, setId] = UseLocalStorage('userId', '');
+    return (
+        <>
+            <input type="text" placeholder='Enter your name' value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+            <h2>Hello {name}!</h2>
+            <input type="text" placeholder='Enter your Id' value={id}
+                onChange={(e) => setId(e.target.value)}
+            />
+            <h2>My Id: {id}!</h2>
+        </>
+    )
+}
+
+export default Icustomhook
+
+// --------------------------------------------------
+
+import React, { useEffect, useState } from 'react'
+
+const UseLocalStorage = (key, initialValue) => {
+    const [name, setName] = useState(
+        localStorage.getItem(key) ?
+            localStorage.getItem(key) : initialValue
+    );
+
+    useEffect(() => {
+        localStorage.setItem(key, name)
+    }, [name, key])
+    return [name, setName]
+}
+
+export default UseLocalStorage
+
+        `
     }
 
 ]

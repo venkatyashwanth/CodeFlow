@@ -1,64 +1,128 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import Layout from '../../components/layout/Layout'
 import styles from "./Reactpage.module.scss"
 import HookElements from '../../content/hooks/IuseHooks/HookElements'
 
+const treeData = [
+    {
+        id: 1,
+        name: "Routers",
+        scrollTo: "cnt1"
+    },
+    {
+        id: 2,
+        name: "React Hooks",
+        scrollTo: "cnt2",
+        children: [
+            {
+                id: "2_1",
+                name: "Use State",
+                scrollTo: "usestatehook"
+            },
+            {
+                id: "2_2",
+                name: "Use Effect",
+                scrollTo: "useeffecthook"
+            },
+            {
+                id: "2_3",
+                name: "Use Ref",
+                scrollTo: "userefhook"
+            },
+            {
+                id: "2_4",
+                name: "Use Memo",
+                scrollTo: "usememohook"
+            },
+            {
+                id: "2_5",
+                name: "Use CallBack",
+                scrollTo: "usecallbackhook"
+            },
+            {
+                id: "2_6",
+                name: "Use Context",
+                scrollTo: "usecontexthook"
+            },
+            {
+                id: "2_7",
+                name: "Use Reducer",
+                scrollTo: "usereducerhook"
+            },
+            {
+                id: "2_8",
+                name: "Use LayoutEffect",
+                scrollTo: "uselayouteffect"
+            },
+            {
+                id: "2_9",
+                name: "Custom Hook",
+                scrollTo: "customhook"
+            },
+        ]
+    },
+]
+
+const TreeNode = ({ scrollToSection, node }) => {
+    const [openNodes, setOpenNodes] = useState({})
+    const toggleNode = (id) => {
+        setOpenNodes((prevState) => ({
+            ...prevState,
+            [id]: !prevState[id],
+        }
+        ))
+    }
+    return (
+        <li className={`${styles.navitem}`}>
+            <div className={`${styles.prntNavItm}`}>
+                <a onClick={() => scrollToSection(node.scrollTo)}>
+                    {node.name}
+                </a>
+                {node.children && (
+                    <span className={`${styles.arrow}`} onClick={() => toggleNode(node.id)}>
+                        {node.children && (openNodes[node.id] ?
+                            <img className={`${styles.open}`} src="/assets/arrow.svg" alt="arrow" /> :
+                            <img className={`${styles.close}`} src="/assets/arrow.svg" alt="arrow" />
+                        )
+                        }
+                    </span>
+                )}
+            </div>
+            <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: openNodes[node.id] ? "auto" : 0, opacity: openNodes[node.id] ? 1 : 0 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                style={{ overflow: "hidden" }}
+            >
+                {node.children && (
+                    <ul className={`${styles.subList}`}>
+                        {
+                            node.children.map((child) => (
+                                <li key={child.id} className={`${styles.subItem}`}>
+                                    <a onClick={() => scrollToSection(child.scrollTo)}>
+                                        {child.name}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                )}
+            </motion.div>
+        </li>
+    )
+}
+
 const Navigation = ({ scrollToSection }) => {
     return (
-        <ul className={`${styles.mainList}`}>
-            <li>
-                <a onClick={() => scrollToSection("cnt1")} style={{ cursor: "pointer" }}>
-                    Routers
-                </a>
-            </li>
-            <li>
-                <a onClick={() => scrollToSection("cnt2")} style={{ cursor: "pointer" }}>
-                    React Hooks
-                </a>
-                <ul className={`${styles.subList}`}>
-                    <li>
-                        <a onClick={() => scrollToSection("usestatehook")} style={{ cursor: "pointer" }}>
-                            Use State
-                        </a>
-                    </li>
-                    <li>
-                        <a onClick={() => scrollToSection("useeffecthook")} style={{ cursor: "pointer" }}>
-                            Use Effect
-                        </a>
-                    </li>
-                    <li>
-                        <a onClick={() => scrollToSection("userefhook")} style={{ cursor: "pointer" }}>
-                            Use Ref
-                        </a>
-                    </li>
-                    <li>
-                        <a onClick={() => scrollToSection("usememohook")} style={{ cursor: "pointer" }}>
-                            Use Memo
-                        </a>
-                    </li>
-                    <li>
-                        <a onClick={() => scrollToSection("usecallbackhook")} style={{ cursor: "pointer" }}>
-                            Use CallBack
-                        </a>
-                    </li>
-                    <li>
-                        <a onClick={() => scrollToSection("usecontexthook")} style={{ cursor: "pointer" }}>
-                            Use Context
-                        </a>
-                    </li>
-                    <li>
-                        <a onClick={() => scrollToSection("usereducerhook")} style={{ cursor: "pointer" }}>
-                            Use Reducer
-                        </a>
-                    </li>
-                    <li>
-                        <a onClick={() => scrollToSection("uselayouteffect")} style={{ cursor: "pointer" }}>
-                            Use LayoutEffect
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <>
+            <ul className={`${styles.navlist}`}>
+                {treeData.map((node) => (
+                    <TreeNode key={node.id} node={node} scrollToSection={scrollToSection} />
+                ))}
+            </ul>
+        </>
     )
 }
 
@@ -74,22 +138,25 @@ const ReactSnips = () => {
     const useContextRef = useRef(null);
     const useReducerRef = useRef(null);
     const useLayoutEffectRef = useRef(null);
+    const customHookRef = useRef(null);
 
     const scrollToSection = (id) => {
         const refs = {
             cnt1: cnt1Ref,
             cnt2: cnt2Ref,
             usestatehook: useStateHookRef,
-            useeffecthook: useEffectHookRef, 
+            useeffecthook: useEffectHookRef,
             userefhook: useRefRef,
             usememohook: useMemoRef,
             usecallbackhook: useCallbackRef,
             usecontexthook: useContextRef,
             usereducerhook: useReducerRef,
-            uselayouteffect: useLayoutEffectRef
+            uselayouteffect: useLayoutEffectRef,
+            customhook: customHookRef
         };
         refs[id]?.current?.scrollIntoView({ behavior: "smooth" });
     };
+
     return (
         <Layout>
             <div className={`${styles.pg_wrap}`}>
@@ -113,7 +180,7 @@ const ReactSnips = () => {
                     </div>
                     <div ref={cnt2Ref} id="cnt2" className={`${styles.fixScroll} ${styles.container}`}>
                         <h4 className={`${styles.Titleheading}`}>React Hooks:</h4>
-                        <HookElements refs={{ useStateHookRef, useEffectHookRef,useRefRef,useMemoRef,useCallbackRef,useContextRef,useReducerRef,useLayoutEffectRef }}/>
+                        <HookElements refs={{ useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef, useContextRef, useReducerRef, useLayoutEffectRef, customHookRef }} />
                     </div>
                     <div id="cont3" className={`${styles.fixScroll}`}>
                         <div className={`${styles.emptyPage}`}>
