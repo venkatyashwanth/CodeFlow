@@ -1,0 +1,36 @@
+.pg_wrap {
+    display: flex;
+}
+
+.sidebar {
+    background-color: tomato;
+    height: calc(100vh - 40px);
+    width: 15%;
+    padding: 10px;
+    position: sticky;
+    top: 40px;
+}
+
+.mainpg {
+    padding: 10px;
+}
+.codeBlock{
+    width: 1200px;
+}
+
+.fixScroll {
+    scroll-margin-top: 40px;
+}
+
+.emptyPage {
+    background-color: gray;
+    height: 50vh;
+    margin: 10px 0;
+}
+.subheading{
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.my10{
+    margin: 10px 0;
+}

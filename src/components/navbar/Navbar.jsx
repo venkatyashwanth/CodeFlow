@@ -13,6 +13,9 @@ const Navbar = () => {
                 <li>
                     <Link to={"/react"}>React</Link>
                 </li>
+                <li>
+                    <Link to={"/mccode"}>Mc_Code</Link>
+                </li>
             </ul>
         </nav>
     </>
