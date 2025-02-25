@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Layout from '../../components/layout/Layout'
 import styles from "./Reactpage.module.scss"
 import HookElements from '../../content/hooks/IuseHooks/HookElements'
+import Iredux from '../../content/redux/Iredux';
 
 const treeData = [
     {
@@ -60,6 +61,33 @@ const treeData = [
                 name: "Custom Hook",
                 scrollTo: "customhook"
             },
+        ]
+    },
+    {
+        id: 3,
+        name: "Redux",
+        scrollTo: "cnt3",
+        children: [
+            {
+                id: "3_1",
+                name: "Dispatch",
+                scrollTo: "redux_dispatch"
+            },
+            {
+                id: "3_2",
+                name: "Action Creators",
+                scrollTo: "redux_actionCreator"
+            },
+            {
+                id: "3_3",
+                name: "Redux Todo",
+                scrollTo: "todo_app"
+            },
+            {
+                id: "3_4",
+                name: "Redux Thunk",
+                scrollTo: "redux_thunk"
+            }
         ]
     },
 ]
@@ -139,6 +167,11 @@ const ReactSnips = () => {
     const useReducerRef = useRef(null);
     const useLayoutEffectRef = useRef(null);
     const customHookRef = useRef(null);
+    const cnt3Ref = useRef(null);
+    const IdispatchRef = useRef(null);
+    const IactionCreatorRef = useRef(null);
+    const ItodoappRef = useRef(null);
+    const IreduxThunkRef = useRef(null);
 
     const scrollToSection = (id) => {
         const refs = {
@@ -152,7 +185,12 @@ const ReactSnips = () => {
             usecontexthook: useContextRef,
             usereducerhook: useReducerRef,
             uselayouteffect: useLayoutEffectRef,
-            customhook: customHookRef
+            customhook: customHookRef,
+            cnt3: cnt3Ref,
+            redux_dispatch: IdispatchRef,
+            redux_actionCreator: IactionCreatorRef,
+            todo_app: ItodoappRef,
+            redux_thunk: IreduxThunkRef
         };
         refs[id]?.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -182,10 +220,9 @@ const ReactSnips = () => {
                         <h4 className={`${styles.Titleheading}`}>React Hooks:</h4>
                         <HookElements refs={{ useStateHookRef, useEffectHookRef, useRefRef, useMemoRef, useCallbackRef, useContextRef, useReducerRef, useLayoutEffectRef, customHookRef }} />
                     </div>
-                    <div id="cont3" className={`${styles.fixScroll}`}>
-                        <div className={`${styles.emptyPage}`}>
-                            <p>content page3</p>
-                        </div>
+                    <div ref={cnt3Ref} id="cnt3" className={`${styles.fixScroll} ${styles.container}`}>
+                        <h4 className={`${styles.Titleheading}`}>Redux</h4>
+                        <Iredux refs={{ IdispatchRef, IactionCreatorRef, ItodoappRef, IreduxThunkRef }} />
                     </div>
                 </div>
             </div>
