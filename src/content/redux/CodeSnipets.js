@@ -394,6 +394,101 @@ const Todo = () => {
 
 export default Todo
       `
+    },
+    {
+      id: 5,
+      'code':`
+      import { configureStore, createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+    task: [],
+    isLoading: false
+};
+
+// RTK Slice
+const taskReducer = createSlice({
+    name: "task",
+    initialState,
+    reducers: {
+        addTask(state,action) {
+            state.task.push(action.payload)
+        },
+        deleteTask(state,action){
+            state.task = state.task.filter((curTask,index) => index !== action.payload)
+        }
+    }
+})
+
+export const {addTask,deleteTask} = taskReducer.actions;
+
+//Create the Redux store 
+export const store = configureStore({
+    reducer : {
+        taskReducer:taskReducer.reducer
+    }
+})
+
+// Todo.js
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { MdDelete } from "react-icons/md";
+import { FaPen } from "react-icons/fa";
+import { addTask, deleteTask } from '../store/Store';
+
+const Todo = () => {
+    const [task, setTask] = useState("");
+    const tasks = useSelector((state) => state.taskReducer.task);
+    const dispatch = useDispatch();
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addTask(task));
+        return setTask('')
+    }
+
+    const handleTaskDelete = (id) => {
+        return dispatch(deleteTask(id))
+    }
+
+    return (
+        <>
+            <div className='container'>
+                <div className='todo-app'>
+                    <h1>
+                        <FaPen />
+                        To-do List:
+                    </h1>
+                    <div className='row'>
+                        <form onSubmit={handleFormSubmit}>
+                            <input type="text" id="input-box" placeholder='Add a new task'
+                                value={task}
+                                onChange={(e) => setTask(e.target.value)}
+                            />
+                            <button>Add Task</button>
+                        </form>
+                    </div>
+                    <ul id="list-container">
+                        {
+                            tasks?.map((curTask, index) => {
+                                return <li key={index} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                    <p>{index}: {curTask}</p>
+                                    <div>
+                                        <MdDelete
+                                            onClick={() => handleTaskDelete(index)}
+                                        />
+                                    </div>
+                                </li>
+                            })
+                        }
+                    </ul>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export default Todo
+
+      `
     }
 ]
 
