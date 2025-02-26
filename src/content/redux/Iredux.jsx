@@ -4,7 +4,7 @@ import CodeBlock from '../../components/codeblock/CodeBlock';
 import data from "./CodeSnipets";
 
 const Iredux = ({ refs }) => {
-    const { IdispatchRef, IactionCreatorRef, ItodoappRef, IreduxThunkRef } = refs;
+    const { IdispatchRef, IactionCreatorRef, ItodoappRef, IreduxThunkRef,IreduxToolkitRef } = refs;
     const textData = Array.from({ length: data.length }, (_, i) => data?.[i]?.code?.toString() || "");
     return (
         <>
@@ -35,6 +35,13 @@ const Iredux = ({ refs }) => {
                 <h4 className={`${styles.subheading}`}>Redux Thunk:-</h4>
                 <div className={`${styles.my10}`}>
                     <CodeBlock code={textData[3]} mode={"javascript"} />
+                </div>
+            </div>
+            {/* React Tool Kit */}
+            <div ref={IreduxToolkitRef} id="redux_toolkit" style={{ scrollMarginTop: "50px" }}>
+                <h4 className={`${styles.subheading}`}>Redux Toolkit:-</h4>
+                <div className={`${styles.my10}`}>
+                    <CodeBlock code={textData[4]} mode={"javascript"} />
                 </div>
             </div>
         </>

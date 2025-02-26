@@ -87,6 +87,11 @@ const treeData = [
                 id: "3_4",
                 name: "Redux Thunk",
                 scrollTo: "redux_thunk"
+            },
+            {
+                id: "3_5",
+                name: "Redux Toolkit",
+                scrollTo: "redux_toolkit"
             }
         ]
     },
@@ -172,6 +177,7 @@ const ReactSnips = () => {
     const IactionCreatorRef = useRef(null);
     const ItodoappRef = useRef(null);
     const IreduxThunkRef = useRef(null);
+    const IreduxToolkitRef = useRef(null);
 
     const scrollToSection = (id) => {
         const refs = {
@@ -190,7 +196,8 @@ const ReactSnips = () => {
             redux_dispatch: IdispatchRef,
             redux_actionCreator: IactionCreatorRef,
             todo_app: ItodoappRef,
-            redux_thunk: IreduxThunkRef
+            redux_thunk: IreduxThunkRef,
+            redux_toolkit: IreduxToolkitRef
         };
         refs[id]?.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -222,7 +229,84 @@ const ReactSnips = () => {
                     </div>
                     <div ref={cnt3Ref} id="cnt3" className={`${styles.fixScroll} ${styles.container}`}>
                         <h4 className={`${styles.Titleheading}`}>Redux</h4>
-                        <Iredux refs={{ IdispatchRef, IactionCreatorRef, ItodoappRef, IreduxThunkRef }} />
+                        <div className={`${styles.my10}`}>
+                            {/* What is Redux */}
+                            <p>
+                                <strong>What is Redux: </strong>
+                                Redux is a tool that helps manage data (also known as "state") in large React apps. It allows us to
+                                keep all our app's data in a single place, known as Redux store, making it easy to share and update
+                                data across the different parts of the app.
+                                Redux is a powerful state management tool often used with React. 
+                            </p>
+                            <br />
+                            {/* Why Redux */}
+                            <p>
+                                <strong>Why Redux: </strong>
+                                In small apps, you can manage data using React's state. But as app grows it becomes tricky to pass data
+                                between many components.
+                                Redux solves this problem by creating a centralized store that holds all the data. This data can be accessed
+                                and updated by any part of the app.
+                            </p>
+                            <br />
+                            {/* How Redux Works */}
+                            <p>
+                                <strong>How Redux works: </strong>
+                                <br />
+                                <strong>Store: </strong>
+                                This is where redux keeps all your data. The Redux store is like a bigbox where all your applications data is kept safe. Everything you
+                                do with Redux - whether adding, removing or updating data goes through this store.
+                                <br /><br />
+                                <strong>Action</strong>
+                                This is an object which tells the redux what to do (like adding a task)
+                                <br /><br />
+                                <strong>Reducers</strong>
+                                How to do. It actually change the data in the store based on actions. A reducer is a function that decides how the state should change 
+                                based on the action. The reducer takes the current state and an action and returns a new state. 
+                                <br />
+                                A key thing to remember 
+                                <ul>
+                                    <li> - Reducers must always return a new state. </li>
+                                    <li> - They should never modify the old state directly. </li>
+                                </ul>
+                                The Reducer takes two arguments. <br />
+                                <strong>State: </strong>
+                                This is the current state. 
+                                <br />
+                                <strong>Action: </strong>
+                                This tells the reducer what to do. It has a type and sometimes a paylaod (which is data). 
+                                We use a <b>switch</b> statement to check the action's type. Base on the the action type, the 
+                                reducer updates the state. 
+                                <br />
+                                <strong>✌️ Best Practice: </strong> 
+                                <br />
+                                Action types: Use a combination of the state domain (like task) and the event (like add)
+                                seperated by slash. For example: <b>task/add</b>
+                                <br />
+                                Immutable State: Never directly change the state. Always return a new state object using ...state to 
+                                copy old state. 
+                            </p>
+                            <br />
+                            {/* Advantages */}
+                            <p>
+                                <strong>Advantages: </strong>
+                                <br />
+                                <strong>Centralized State Management: </strong>
+                                Redux stores your app's state in one place, making it easier to manage and access data across components. 
+                                <br />
+                                <strong>Global Access: </strong>
+                                Any component can access and update the state without passing props down. 
+                                <br />
+                                <strong>Predictable Updates: </strong>
+                                State changes are controlled and predictable using reducers.
+                                <br />
+                                <strong>Dev Tools: </strong>
+                                Powerful tools for debugging, inspecting state and replaying actions. 
+                                <br />
+                                <strong>Async support: </strong>
+                                Middleware like Thunk or Saga handles async tasks, keeping the code clean. 
+                            </p>
+                        </div>
+                        <Iredux refs={{ IdispatchRef, IactionCreatorRef, ItodoappRef, IreduxThunkRef, IreduxToolkitRef }} />
                     </div>
                 </div>
             </div>
