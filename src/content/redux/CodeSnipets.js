@@ -262,8 +262,8 @@ export const deleteTask = (id) => {
         `
     },
     {
-      id: 4,
-      'code': `
+        id: 4,
+        'code': `
       import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import { thunk } from 'redux-thunk';
@@ -396,14 +396,21 @@ export default Todo
       `
     },
     {
-      id: 5,
-      'code':`
-      import { configureStore, createSlice } from '@reduxjs/toolkit';
+        id: 5,
+        'code': `
+import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
     task: [],
-    isLoading: false
+    isLoading: false,
+    error: null
 };
+
+export const fetchTask = createAsyncThunk('task/fetch',async() =>{
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=3");
+    const data = await response.json();
+    return data.map((curTask) => curTask.title);
+} )
 
 // RTK Slice
 const taskReducer = createSlice({
@@ -416,6 +423,21 @@ const taskReducer = createSlice({
         deleteTask(state,action){
             state.task = state.task.filter((curTask,index) => index !== action.payload)
         }
+    },
+    extraReducers: (builder) => {
+        builder
+        .addCase(fetchTask.pending, (state) => {
+            state.isLoading = true; 
+            state.error = null;
+        })
+        .addCase(fetchTask.fulfilled, (state,action) => {
+            state.isLoading = false;
+            state.task = [...state.task,...action.payload]
+        })
+        .addCase(fetchTask.rejected, (state,action) => {
+            state.isLoading = false;
+            state.error = action.error.message;
+        })
     }
 })
 
@@ -428,12 +450,13 @@ export const store = configureStore({
     }
 })
 
+
 // Todo.js
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { MdDelete } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
-import { addTask, deleteTask } from '../store/Store';
+import { addTask, deleteTask, fetchTask } from '../store/Store';
 
 const Todo = () => {
     const [task, setTask] = useState("");
@@ -448,7 +471,10 @@ const Todo = () => {
     const handleTaskDelete = (id) => {
         return dispatch(deleteTask(id))
     }
-
+    const handleFetchTasks = () => {
+        // Fetch Tasks from API
+        return dispatch(fetchTask())
+    }
     return (
         <>
             <div className='container'>
@@ -466,6 +492,7 @@ const Todo = () => {
                             <button>Add Task</button>
                         </form>
                     </div>
+                    <button onClick={handleFetchTasks}>Fetch Tasks</button>
                     <ul id="list-container">
                         {
                             tasks?.map((curTask, index) => {
