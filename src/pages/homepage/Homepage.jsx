@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Outlet } from "react-router-dom";
 import styles from './Homepage.module.scss';
 import Layout from '../../components/layout/Layout';
+import CodeBlock from '../../components/codeblock/CodeBlock';
 
 const Homepage = () => {
     return (
@@ -32,9 +33,11 @@ const Homepage = () => {
                             <h2>Form Inputs</h2>
                         </Link>
                     </div>
+
                     <div id="cont2" className={`${styles.fixScroll}`}>
-                        <div className={`${styles.emptyPage}`}>
-                            <p>content page2</p>
+                        <div style={{width: "1200px"}}>
+
+                            <CodeBlock code="Dummy Text" mode={"javascript"} />
                         </div>
                     </div>
                     <div id="cont3" className={`${styles.fixScroll}`}>
