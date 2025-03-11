@@ -18,7 +18,7 @@ const MachineCode = () => {
                         </li>
                         <li>
                             <a href="#cont2">
-                                content2
+                                Autocomplete Search
                             </a>
                         </li>
                         <li>
@@ -35,6 +35,15 @@ const MachineCode = () => {
                         </h4>
                         <div className={`${styles.codeBlock}`}>
                             <CodeBlock code={textData[0]} mode={"javascript"} />
+                        </div>
+                    </div>
+                    <br />
+                    <div id="cont1" style={{ scrollMarginTop: "50px" }}>
+                        <h4 className={`${styles.subheading}`}>
+                            AutoComplete:-
+                        </h4>
+                        <div className={`${styles.codeBlock}`}>
+                            <CodeBlock code={textData[1]} mode={"javascript"} />
                         </div>
                     </div>
                 </div>
